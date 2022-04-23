@@ -1,4 +1,4 @@
-import Axios, {AxiosInstance} from 'axios';
+import Axios, { AxiosInstance } from 'axios';
 // import Config from 'react-native-config';
 // import { getUniqueId, getReadableVersion } from 'react-native-device-info';
 // import { Base64 } from 'js-base64';
@@ -71,7 +71,8 @@ const apiService = (url, type, data, headers) => {
         resolve(res.data || res);
       })
       .catch(error => {
-        console.log('error', error.response);
+        console.log('apiService error 1', error);
+        console.log('apiService error 2', error.message);
         if (error && !error.response) {
           console.log(
             'Could not connect to the server, please check your internet connection',

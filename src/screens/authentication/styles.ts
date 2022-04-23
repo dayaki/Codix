@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 const spacing = [0, 4, 8, 12, 16, 24, 32, 48, 64];
 
@@ -20,6 +20,7 @@ export const styles = StyleSheet.create({
     height: 60,
   },
   appName: {
+    fontFamily: 'NotoSans-Bold',
     fontSize: 18,
     color: '#fff',
     alignSelf: 'center',
@@ -39,6 +40,7 @@ export const styles = StyleSheet.create({
   },
   loginText: {
     color: 'rgba(0,0,0,0.9)',
+    fontFamily: 'NotoSans-Bold',
     fontSize: 20,
     fontWeight: 'bold',
   },
@@ -47,18 +49,22 @@ export const styles = StyleSheet.create({
   },
   label: {
     color: 'rgba(0,0,0,0.8)',
+    fontFamily: 'NotoSans-SemiBold',
     fontSize: 14,
     marginBottom: 6,
   },
   input: {
+    fontFamily: 'NotoSans-SemiBold',
+    fontSize: 13,
     borderRadius: 6,
     borderColor: 'rgba(0,0,0,0.2)',
     borderWidth: 1,
-    height: 46,
+    height: 50,
     paddingLeft: 10,
   },
   forgotPass: {
     color: 'red',
+    fontFamily: 'NotoSans-SemiBold',
     fontSize: 14,
     paddingVertical: 20,
     alignSelf: 'flex-end',
