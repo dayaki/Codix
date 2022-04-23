@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: backgroundColor,
     paddingHorizontal: 20,
-    paddingTop: 50,
+    paddingTop: 20,
   },
   page_title: {
     fontFamily: 'Roboto-Bold',
@@ -22,8 +22,9 @@ export const styles = StyleSheet.create({
   },
   qrScanner: {
     width: '100%',
+    height: 540,
     alignSelf: 'center',
-    marginTop: 100,
+    marginTop: 50,
   },
   backBtn: {
     width: 100,
@@ -31,6 +32,13 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 15,
     position: 'absolute',
     left: 8,
+  },
+  backBtnBlock: {
+    // backgroundColor: 'pink',
+    width: 60,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    marginLeft: -10,
   },
   backImage: {
     width: 24,
@@ -87,5 +95,40 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
     position: 'absolute',
     bottom: 60,
+  },
+  textarea: {
+    borderColor: 'rgba(30, 30, 41,0.3)',
+    borderWidth: 1,
+    textAlignVertical: 'top',
+    paddingLeft: 10,
+    marginTop: 10,
+    borderRadius: 4,
+    fontFamily: 'NotoSans-Regular',
+    color: titleColor,
+    backgroundColor: 'rgba(255,255,255,0.6)',
+  },
+  infoBox: {
+    backgroundColor: '#fff',
+    borderRadius: 6,
+    width: '100%',
+    marginTop: 20,
+    // flexDirection: 'row',
+    // alignItems: 'center',
+    // justifyContent: 'space-between',
+    padding: 10,
+  },
+  infoBoxLayer: {
+    marginBottom: 10,
+  },
+  infoBoxTitle: {
+    fontFamily: 'NotoSans-Bold',
+    color: titleColor,
+    fontSize: 14,
+  },
+  infoBoxLabel: {
+    fontFamily: 'NotoSans-SemiBold',
+    fontSize: 13,
+    color: 'rgba(27, 28, 33,0.5)',
+    marginTop: -4,
   },
 });

@@ -1,5 +1,6 @@
-const PROD_URL = 'https://xidoc-middleware.azurewebsites.net';
-export const baseURL = `${PROD_URL}/api/v1`;
+// const PROD_URL = 'https://codixmiddleware.azurewebsites.net';
+const DEV_URL = 'https://xidoc-middleware.azurewebsites.net';
+export const baseURL = `${DEV_URL}/api/v1`;
 
 // Login
 export const postLogin = `${baseURL}/account/login`;
@@ -31,3 +32,4 @@ export const getProductBatches = (
 `;
 export const putNewProduct = (customerId: string, barcodeId: string) =>
   `${baseURL}/organisations/current/feedbacks/customer/${customerId}/barcode/${barcodeId}/attachproducttocustomer`;
+export const postReportDevice = `${baseURL}/organisations/current/feedbacks/reportfaultydevice`;
