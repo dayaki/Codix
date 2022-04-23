@@ -19,6 +19,7 @@ export const styles = StyleSheet.create({
     fontFamily: 'Roboto-Medium',
     fontSize: 14,
     opacity: 0.8,
+    marginBottom: 20,
   },
   qrScanner: {
     width: '100%',
@@ -130,5 +131,43 @@ export const styles = StyleSheet.create({
     fontSize: 13,
     color: 'rgba(27, 28, 33,0.5)',
     marginTop: -4,
+  },
+  //   Questions
+  questions: {
+    // paddingHorizontal: 20,
+    paddingTop: 10,
+  },
+  questionsWrap: {
+    borderBottomColor: 'rgba(27, 28, 33,0.2)',
+    borderBottomWidth: 1,
+    paddingBottom: 10,
+  },
+  questionInfo: {
+    fontFamily: 'NotoSans-Medium',
+    color: '#1E1E29',
+    fontSize: 14,
+    lineHeight: 20,
+    // opacity: 0.8,
+  },
+  question: {
+    marginTop: 20,
+  },
+  questionText: {
+    fontFamily: 'NotoSans-Medium',
+    color: titleColor,
+    fontSize: 15,
+    lineHeight: 20,
+    opacity: 0.9,
+    marginBottom: 10,
+  },
+  radioStyle: {
+    marginTop: 4,
+  },
+  radioLabel: {
+    fontSize: 16,
+    color: '#000',
+    fontFamily: 'NotoSans-SemiBold',
+    paddingRight: 20,
+    marginLeft: -4,
   },
 });

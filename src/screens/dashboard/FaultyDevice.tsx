@@ -123,6 +123,8 @@ const FaultyDevice = ({ navigation }) => {
               fadeIn
               reactivate
               reactivateTimeout={60000}
+              containerStyle={{ borderRadius: 30 }}
+              cameraContainerStyle={{ borderRadius: 30 }}
               cameraStyle={styles.qrScanner}
               onRead={onSuccess}
             />

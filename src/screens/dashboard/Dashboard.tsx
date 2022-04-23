@@ -26,7 +26,7 @@ const Dashboard = ({ navigation }) => {
         <TouchableOpacity
           activeOpacity={0.6}
           style={styles.btn}
-          onPress={() => navigation.navigate('feedback_questions')}>
+          onPress={() => navigation.navigate('faulty_device')}>
           <Image
             source={require('../../../assets/images/faulty.png')}
             resizeMode="cover"

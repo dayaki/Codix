@@ -7,7 +7,6 @@ const Success = ({ navigation, route }) => {
   const { message } = route.params || null;
   return (
     <View style={styles.container}>
-      {/* <Text style={styles.page_title}>Register Device</Text> */}
       <Image
         source={require('../../../assets/images/check.png')}
         resizeMode="cover"

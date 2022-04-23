@@ -107,7 +107,7 @@ const RegisterDevice = ({ navigation }) => {
       <View style={styles.container}>
         <TouchableOpacity
           activeOpacity={0.6}
-          style={styles.backBtn}
+          style={styles.backBtnBlock}
           onPress={() => navigation.goBack()}>
           <Image
             source={require('../../../assets/images/back2.png')}
