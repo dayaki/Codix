@@ -16,7 +16,7 @@ import apiService from '../../utils/apiService';
 import { checkRegStatus, getBarcode } from './utils';
 import { getQuestions, postSubmitFeedback } from '../../utils/endpoints';
 import { useAppSelector } from '../../hooks';
-import { BarcodeData } from '../../utils/interfaces';
+import { BarcodeInterface } from '../../utils/interfaces';
 
 var radio_props = [
   { label: '1', value: 1 },
@@ -31,7 +31,19 @@ const CreateFeedback = ({ navigation }) => {
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [spinner, setSpinner] = useState(false);
-  const [barcodeData, setBarcodeData] = useState<BarcodeData>();
+  const [barcodeData, setBarcodeData] = useState<BarcodeInterface>({
+    id: '7881',
+    customer: {
+      customerName: '',
+      address: '',
+    },
+    product: {
+      productServiceName: '',
+    },
+    batch: {
+      batchNumber: '',
+    },
+  });
   const [questions, setQuestions] = useState([]);
   const [comments, setComments] = useState('');
   const [checkBoxStatus, setCheckBoxStatus] = useState([]);
@@ -59,7 +71,7 @@ const CreateFeedback = ({ navigation }) => {
   };
 
   const handleSubmit = async () => {
-    if (checkBoxStatus.length === 0) {
+    if (checkBoxStatus.length !== questions.length) {
       Alert.alert('Error', 'Please enter your responses.');
       return;
     }
@@ -116,6 +128,36 @@ const CreateFeedback = ({ navigation }) => {
           />
         ) : (
           <>
+            <View style={styles.infoBox}>
+              <View style={styles.infoBoxLayer}>
+                <Text style={styles.infoBoxTitle}>Barcode ID</Text>
+                <Text style={styles.infoBoxLabel}>{barcodeData.id}</Text>
+              </View>
+              <View style={styles.infoBoxLayer}>
+                <Text style={styles.infoBoxTitle}>Customer Name</Text>
+                <Text style={styles.infoBoxLabel}>
+                  {barcodeData.customer.customerName}
+                </Text>
+              </View>
+              <View style={styles.infoBoxLayer}>
+                <Text style={styles.infoBoxTitle}>Customer Location</Text>
+                <Text style={styles.infoBoxLabel}>
+                  {barcodeData.customer.address}
+                </Text>
+              </View>
+              <View style={styles.infoBoxLayer}>
+                <Text style={styles.infoBoxTitle}>Device Name</Text>
+                <Text style={styles.infoBoxLabel}>
+                  {barcodeData.product.productServiceName}
+                </Text>
+              </View>
+              <View style={styles.infoBoxLayer}>
+                <Text style={styles.infoBoxTitle}>Batch Number</Text>
+                <Text style={styles.infoBoxLabel}>
+                  {barcodeData.batch.batchNumber}
+                </Text>
+              </View>
+            </View>
             <View style={styles.questions}>
               <View style={styles.questionsWrap}>
                 <Text style={styles.questionInfo}>

@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   Image,
   Alert,
-  ScrollView,
 } from 'react-native';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -15,34 +14,21 @@ import apiService from '../../utils/apiService';
 import { getBarcodeDetails, postReportDevice } from '../../utils/endpoints';
 import { styles } from '../styles';
 import { checkRegStatus } from './utils';
-
-interface BarcodeData {
-  id: string;
-  customer: {
-    customerName: string;
-    address: string;
-  };
-  product: {
-    productServiceName: string;
-  };
-  batch: {
-    batchNumber: string;
-  };
-}
+import { BarcodeInterface } from '../../utils/interfaces';
 
 const FaultyDevice = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [spinner, setSpinner] = useState(false);
   const [page, setPage] = useState(1);
   const [barcode, setBarcode] = useState('');
-  const [product, setProduct] = useState('');
-  const [barcodeData, setBarcodeData] = useState<BarcodeData>({
+  const [barcodeData, setBarcodeData] = useState<BarcodeInterface>({
     id: '7881',
     customer: {
       customerName: '',
       address: '',
     },
     product: {
+      id: '',
       productServiceName: '',
     },
     batch: {
@@ -54,9 +40,8 @@ const FaultyDevice = ({ navigation }) => {
   const onSuccess = async ({ data }: { data: string }) => {
     setSpinner(true);
     const barcodeIds = data.split(' ');
-    const [barcodeId, , productId] = barcodeIds;
+    const [barcodeId] = barcodeIds;
     setBarcode(barcodeId);
-    setProduct(productId);
     const { isAttachedToCustomer } = await checkRegStatus(barcodeId);
     if (isAttachedToCustomer) {
       try {
@@ -73,17 +58,22 @@ const FaultyDevice = ({ navigation }) => {
         Alert.alert('Error', error.message);
         setSpinner(false);
       }
+    } else {
+      Alert.alert('Error', 'This device is not registered yet.');
+      navigation.navigate('dashboard');
     }
   };
 
   const handleSubmit = () => {
     if (comments !== '') {
       setIsLoading(true);
-      apiService(postReportDevice, 'post', {
+      const payload = {
         faultName: comments,
-        productId: product,
+        productId: barcodeData.product.id,
         barcodeId: barcode,
-      })
+      };
+      console.log('handleSubmit', payload);
+      apiService(postReportDevice, 'post', payload)
         .then(({ message }) => {
           setIsLoading(false);
           navigation.navigate('success', { message });
@@ -101,7 +91,10 @@ const FaultyDevice = ({ navigation }) => {
   return (
     <>
       <Spinner visible={spinner} />
-      <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
+      <KeyboardAwareScrollView
+        enableOnAndroid
+        showsVerticalScrollIndicator={false}
+        style={styles.container}>
         <TouchableOpacity
           activeOpacity={0.6}
           style={styles.backBtnBlock}
@@ -182,7 +175,7 @@ const FaultyDevice = ({ navigation }) => {
             />
           </>
         )}
-      </ScrollView>
+      </KeyboardAwareScrollView>
     </>
   );
 };

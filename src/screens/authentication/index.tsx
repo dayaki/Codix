@@ -1,12 +1,5 @@
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  ImageBackground,
-  Image,
-  TextInput,
-  TouchableOpacity,
-} from 'react-native';
+import { View, Text, ImageBackground, Image, TextInput } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useDispatch } from 'react-redux';
 import { userLogin } from '../../appSlice';
@@ -28,9 +21,9 @@ const Login = () => {
       password,
     })
       .then(({ data }) => {
-        console.log('login user', data);
-        dispatch(userLogin(data));
+        // console.log('login user', data);
         setIsLoading(false);
+        dispatch(userLogin(data));
       })
       .catch(err => {
         console.log('login err', err);

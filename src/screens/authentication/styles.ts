@@ -61,6 +61,7 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     height: 50,
     paddingLeft: 10,
+    color: '#000',
   },
   forgotPass: {
     color: 'red',
