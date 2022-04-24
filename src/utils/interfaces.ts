@@ -23,3 +23,19 @@ export type BarcodeData = {
   id: string;
   organisationName: string;
 };
+export interface BarcodeInterface {
+  id: string;
+  customer: {
+    id?: string;
+    customerName: string;
+    address: string;
+  };
+  product: {
+    id?: string;
+    productServiceName: string;
+  };
+  batch: {
+    id?: string;
+    batchNumber: string;
+  };
+}

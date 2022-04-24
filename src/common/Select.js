@@ -9,6 +9,7 @@ import {
   Image,
 } from 'react-native';
 import BottomOverlay from 'react-native-raw-bottom-sheet';
+import { titleColor } from './Colors';
 
 // interface SheetProps {
 //   height: number;
@@ -41,9 +42,6 @@ export const SelectSheet = ({
       );
       setItems(filter);
     }
-    // return () => {
-    //   setItems({});
-    // };
   }, [searchText, data]);
 
   const handleClose = () => {
@@ -71,14 +69,18 @@ export const SelectSheet = ({
               resizeMode="cover"
               style={styles.closeImg}
             />
-            {/* <Cancel color="#464646" size={40} /> */}
           </TouchableOpacity>
           <Text style={styles.title}>{title}</Text>
         </View>
         <View style={styles.search}>
-          {/* <Search style={styles.searchIcon} /> */}
+          <Image
+            source={require('../../assets/images/search.png')}
+            resizeMode="cover"
+            style={styles.searchIcon}
+          />
           <TextInput
             placeholder="Search"
+            placeholderTextColor={titleColor}
             style={styles.input}
             value={searchText}
             onChangeText={text => setSearchText(text)}
@@ -111,15 +113,103 @@ export const SelectSheet = ({
   );
 };
 
-// export const SelectView = ({ onPress, title, label }) => (
-//   <TouchableOpacity
-//     activeOpacity={0.7}
-//     onPress={onPress}
-//     style={styles.selectView}>
-//     <TitleText title={title} style={styles.selectViewTitle} />
-//     {label && <Text style={styles.selectViewLabel}>{label}</Text>}
-//   </TouchableOpacity>
-// );
+export const SelectSheetBatch = ({
+  height = 599,
+  openRef,
+  title,
+  data,
+  useName,
+  showLabel,
+  useLabel,
+  onSelect,
+}) => {
+  const [searchText, setSearchText] = useState('');
+  const [items, setItems] = useState(data);
+
+  useEffect(() => {
+    console.log('SelectSheetBatch EFFERT', data);
+    setItems(data);
+  }, [data]);
+
+  useEffect(() => {
+    if (searchText !== '') {
+      const filter = data.filter(el =>
+        el[useName].toLowerCase().includes(searchText.toLowerCase()),
+      );
+      setItems(filter);
+    } else {
+      setItems(data);
+    }
+  }, [searchText]);
+
+  const handleClose = () => {
+    setSearchText('');
+  };
+
+  return (
+    <BottomOverlay
+      ref={openRef}
+      height={height}
+      duration={300}
+      onClose={handleClose}
+      animationType="fade"
+      customStyles={{
+        container: styles.container,
+      }}>
+      <View style={styles.select}>
+        <View styles={styles.header}>
+          <TouchableOpacity
+            activeOpacity={0.8}
+            style={styles.selectBtn}
+            onPress={() => openRef.current.close()}>
+            <Image
+              source={require('../../assets/images/close.png')}
+              resizeMode="cover"
+              style={styles.closeImg}
+            />
+          </TouchableOpacity>
+          <Text style={styles.title}>{title}</Text>
+        </View>
+        <View style={styles.search}>
+          <Image
+            source={require('../../assets/images/search.png')}
+            resizeMode="cover"
+            style={styles.searchIcon}
+          />
+          <TextInput
+            placeholder="Search"
+            placeholderTextColor={titleColor}
+            style={styles.input}
+            value={searchText}
+            onChangeText={text => setSearchText(text)}
+            importantForAutofill="no"
+            autoComplete="off"
+            autoCorrect={false}
+          />
+        </View>
+
+        <ScrollView showsVerticalScrollIndicator={false}>
+          {items &&
+            items.map((item, index) => (
+              <TouchableOpacity
+                key={index}
+                activeOpacity={0.7}
+                onPress={() => {
+                  onSelect(item);
+                  openRef.current.close();
+                }}
+                style={styles.selectView}>
+                <Text style={styles.selectViewTitle}>{item[useName]}</Text>
+                {showLabel && (
+                  <Text style={styles.selectViewLabel}>{item[useLabel]}</Text>
+                )}
+              </TouchableOpacity>
+            ))}
+        </ScrollView>
+      </View>
+    </BottomOverlay>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -153,6 +243,7 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: 'NotoSans-SemiBold',
     fontSize: 15,
+    color: titleColor,
     alignSelf: 'center',
   },
   search: {
@@ -166,21 +257,23 @@ const styles = StyleSheet.create({
   },
   searchIcon: {
     position: 'absolute',
-    left: 1,
+    left: 6,
+    width: 18,
+    height: 18,
   },
   input: {
     fontFamily: 'NotoSans-SemiBold',
     fontSize: 12,
-    color: 'blue',
+    color: titleColor,
     opacity: 0.8,
-    paddingLeft: 10,
+    paddingLeft: 30,
     backgroundColor: 'transparent',
     width: '100%',
     height: 40,
     marginTop: 4,
   },
   selectView: {
-    paddingVertical: 20,
+    paddingVertical: 14,
     borderBottomColor: 'rgba(83,85,90,0.3)',
     borderBottomWidth: 1,
     borderStyle: 'solid',
@@ -188,11 +281,13 @@ const styles = StyleSheet.create({
   selectViewTitle: {
     fontFamily: 'NotoSans-SemiBold',
     fontSize: 12,
+    color: titleColor,
   },
   selectViewLabel: {
     fontFamily: 'NotoSans-SemiBold',
-    fontSize: 10,
-    color: 'blue',
+    fontSize: 11,
+    color: titleColor,
     opacity: 0.4,
+    marginTop: -2,
   },
 });
