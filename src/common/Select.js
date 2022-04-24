@@ -127,7 +127,6 @@ export const SelectSheetBatch = ({
   const [items, setItems] = useState(data);
 
   useEffect(() => {
-    console.log('SelectSheetBatch EFFERT', data);
     setItems(data);
   }, [data]);
 
