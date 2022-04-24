@@ -14,7 +14,7 @@ export const Spinner = ({ visible }: { visible: boolean }) => (
 
 const styles = StyleSheet.create({
   spinner: {
-    backgroundColor: 'rgba(0,0,0,0.3)',
+    backgroundColor: 'rgba(0,0,0,0.5)',
     position: 'absolute',
     width: '100%',
     height: '100%',
