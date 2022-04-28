@@ -9,8 +9,8 @@ import { postLogin } from '../../utils/endpoints';
 import { styles } from './styles';
 
 const Login = () => {
-  const [email, setEmail] = useState('anenetemocu@gmail.com');
-  const [password, setPassword] = useState('Nigeria2011!');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
 
